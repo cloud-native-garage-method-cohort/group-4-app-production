@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    app.openshift.io/vcs-ref: ade4fe1607c00e62b0dc6e06318a9cbf21465408
+    app.openshift.io/vcs-ref: 5ed54f84c35fb5734aee08f2a613a667c77d48d0
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group-4-app-backend
   labels:
     app.kubernetes.io/instance: dog-facts-backend
@@ -24,7 +24,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    app.openshift.io/vcs-ref: ade4fe1607c00e62b0dc6e06318a9cbf21465408
+    app.openshift.io/vcs-ref: 5ed54f84c35fb5734aee08f2a613a667c77d48d0
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group-4-app-backend
   labels:
     app.kubernetes.io/instance: dog-facts-backend
@@ -41,7 +41,7 @@ spec:
   template:
     metadata:
       annotations:
-        app.openshift.io/vcs-ref: ade4fe1607c00e62b0dc6e06318a9cbf21465408
+        app.openshift.io/vcs-ref: 5ed54f84c35fb5734aee08f2a613a667c77d48d0
         app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group-4-app-backend
       labels:
         app.kubernetes.io/instance: dog-facts-backend
@@ -53,7 +53,7 @@ spec:
         - name: PROTOCOLS
         - name: LOG_LEVEL
           value: debug
-        image: quay.io/timothy_credo/dog-facts-backend:ade4fe1607c00e62b0dc6e06318a9cbf21465408
+        image: quay.io/timothy_credo/dog-facts-backend:5ed54f84c35fb5734aee08f2a613a667c77d48d0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -66,7 +66,7 @@ spec:
           timeoutSeconds: 1
         name: dog-facts-backend
         ports:
-        - containerPort: 3000
+        - containerPort: 8080
           name: http
           protocol: TCP
         readinessProbe:
@@ -91,7 +91,7 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   annotations:
-    app.openshift.io/vcs-ref: ade4fe1607c00e62b0dc6e06318a9cbf21465408
+    app.openshift.io/vcs-ref: 5ed54f84c35fb5734aee08f2a613a667c77d48d0
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group-4-app-backend
   labels:
     app.kubernetes.io/instance: dog-facts-backend
