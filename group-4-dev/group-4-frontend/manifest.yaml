@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: c9723f4fa4e15b9db03f175c90c5d9e907282cc7
+    app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group4-app-frontend
+  labels:
+    app.kubernetes.io/instance: group-4-frontend
+    app.kubernetes.io/name: group-4-frontend
+  name: group-4-app-service
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: group-4-app
+    app.kubernetes.io/instance: group-4-frontend
+    app.kubernetes.io/name: group-4-frontend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: c9723f4fa4e15b9db03f175c90c5d9e907282cc7
+    app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group4-app-frontend
+  labels:
+    app: group-4-app
+    app.kubernetes.io/instance: group-4-frontend
+    app.kubernetes.io/name: group-4-frontend
+  name: group-4-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: group-4-app
+      app.kubernetes.io/instance: group-4-frontend
+      app.kubernetes.io/name: group-4-frontend
+  template:
+    metadata:
+      annotations:
+        app.openshift.io/vcs-ref: c9723f4fa4e15b9db03f175c90c5d9e907282cc7
+        app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group4-app-frontend
+      labels:
+        app: group-4-app
+        app.kubernetes.io/instance: group-4-frontend
+        app.kubernetes.io/name: group-4-frontend
+    spec:
+      containers:
+      - image: quay.io/cayops/group-4-frontend:c9723f4fa4e15b9db03f175c90c5d9e907282cc7
+        name: react-app
+        ports:
+        - containerPort: 3000
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: c9723f4fa4e15b9db03f175c90c5d9e907282cc7
+    app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group4-app-frontend
+  labels:
+    app.kubernetes.io/instance: group-4-frontend
+    app.kubernetes.io/name: group-4-frontend
+  name: group-4-app-route
+spec:
+  to:
+    kind: Service
+    name: group-4-app-service
