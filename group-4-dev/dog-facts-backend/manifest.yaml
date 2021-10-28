@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    app.openshift.io/vcs-ref: 21f1e0d47052bf09118e78777ace764a59ca9df0
+    app.openshift.io/vcs-ref: 77bf89e43974d0c7983ba29fbb479f9b8f88a5b4
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group-4-app-backend
   labels:
     app.kubernetes.io/instance: dog-facts-backend
@@ -24,7 +24,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    app.openshift.io/vcs-ref: 21f1e0d47052bf09118e78777ace764a59ca9df0
+    app.openshift.io/vcs-ref: 77bf89e43974d0c7983ba29fbb479f9b8f88a5b4
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group-4-app-backend
   labels:
     app.kubernetes.io/instance: dog-facts-backend
@@ -41,7 +41,7 @@ spec:
   template:
     metadata:
       annotations:
-        app.openshift.io/vcs-ref: 21f1e0d47052bf09118e78777ace764a59ca9df0
+        app.openshift.io/vcs-ref: 77bf89e43974d0c7983ba29fbb479f9b8f88a5b4
         app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group-4-app-backend
       labels:
         app.kubernetes.io/instance: dog-facts-backend
@@ -53,7 +53,7 @@ spec:
         - name: PROTOCOLS
         - name: LOG_LEVEL
           value: debug
-        image: quay.io/timothy_credo/dog-facts-backend:21f1e0d47052bf09118e78777ace764a59ca9df0
+        image: quay.io/timothy_credo/dog-facts-backend:77bf89e43974d0c7983ba29fbb479f9b8f88a5b4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -91,7 +91,7 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   annotations:
-    app.openshift.io/vcs-ref: 21f1e0d47052bf09118e78777ace764a59ca9df0
+    app.openshift.io/vcs-ref: 77bf89e43974d0c7983ba29fbb479f9b8f88a5b4
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group-4-app-backend
   labels:
     app.kubernetes.io/instance: dog-facts-backend
