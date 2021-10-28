@@ -1,0 +1,107 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: ade4fe1607c00e62b0dc6e06318a9cbf21465408
+    app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group-4-app-backend
+  labels:
+    app.kubernetes.io/instance: dog-facts-backend
+    app.kubernetes.io/name: dog-facts-backend
+  name: dog-facts-backend
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/instance: dog-facts-backend
+    app.kubernetes.io/name: dog-facts-backend
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: ade4fe1607c00e62b0dc6e06318a9cbf21465408
+    app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group-4-app-backend
+  labels:
+    app.kubernetes.io/instance: dog-facts-backend
+    app.kubernetes.io/name: dog-facts-backend
+  name: dog-facts-backend
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: dog-facts-backend
+      app.kubernetes.io/name: dog-facts-backend
+  template:
+    metadata:
+      annotations:
+        app.openshift.io/vcs-ref: ade4fe1607c00e62b0dc6e06318a9cbf21465408
+        app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group-4-app-backend
+      labels:
+        app.kubernetes.io/instance: dog-facts-backend
+        app.kubernetes.io/name: dog-facts-backend
+    spec:
+      containers:
+      - env:
+        - name: INGRESS_HOST
+        - name: PROTOCOLS
+        - name: LOG_LEVEL
+          value: debug
+        image: quay.io/timothy_credo/dog-facts-backend:ade4fe1607c00e62b0dc6e06318a9cbf21465408
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: dog-facts-backend
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: ade4fe1607c00e62b0dc6e06318a9cbf21465408
+    app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group-4-app-backend
+  labels:
+    app.kubernetes.io/instance: dog-facts-backend
+    app.kubernetes.io/name: dog-facts-backend
+  name: dog-facts-backend
+spec:
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: dog-facts-backend
+    weight: 100
+  wildcardPolicy: None
