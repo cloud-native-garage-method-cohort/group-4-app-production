@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    app.openshift.io/vcs-ref: b7d8427f0c46949f301cbe85fd22009a50c35396
+    app.openshift.io/vcs-ref: beccc1d81c014d5847ce22b797de5d03c5062176
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group4-app-frontend
   labels:
     app.kubernetes.io/name: group-4-frontend
@@ -20,7 +20,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    app.openshift.io/vcs-ref: b7d8427f0c46949f301cbe85fd22009a50c35396
+    app.openshift.io/vcs-ref: beccc1d81c014d5847ce22b797de5d03c5062176
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group4-app-frontend
   labels:
     app: group-4-frontend
@@ -35,14 +35,14 @@ spec:
   template:
     metadata:
       annotations:
-        app.openshift.io/vcs-ref: b7d8427f0c46949f301cbe85fd22009a50c35396
+        app.openshift.io/vcs-ref: beccc1d81c014d5847ce22b797de5d03c5062176
         app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group4-app-frontend
       labels:
         app: group-4-frontend
         app.kubernetes.io/name: group-4-frontend
     spec:
       containers:
-      - image: quay.io/cayops/group-4-frontend:b7d8427f0c46949f301cbe85fd22009a50c35396
+      - image: quay.io/cayops/group-4-frontend:beccc1d81c014d5847ce22b797de5d03c5062176
         name: react-app
         ports:
         - containerPort: 3000
@@ -53,7 +53,7 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   annotations:
-    app.openshift.io/vcs-ref: b7d8427f0c46949f301cbe85fd22009a50c35396
+    app.openshift.io/vcs-ref: beccc1d81c014d5847ce22b797de5d03c5062176
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/group4-app-frontend
   labels:
     app.kubernetes.io/name: group-4-frontend
